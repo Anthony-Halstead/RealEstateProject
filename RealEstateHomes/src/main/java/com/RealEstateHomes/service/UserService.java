@@ -82,7 +82,7 @@ public class UserService {
 
     public User addPropertyToUser(Integer userId, Property property){
         User user = userRepo.findById(userId).get();
-        user.getUserPropertys().add(property);
+        user.getUserProperties().add(property);
         return userRepo.save(user);
     }
 }

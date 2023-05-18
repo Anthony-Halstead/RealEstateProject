@@ -1,6 +1,8 @@
 package com.RealEstateHomes.service;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.login.AccountNotFoundException;
@@ -8,18 +10,27 @@ import javax.security.auth.login.AccountNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.RealEstateHomes.entity.Photo;
 import com.RealEstateHomes.entity.Property;
+import com.RealEstateHomes.entity.User;
 import com.RealEstateHomes.repo.PropertyRepo;
 
 @Service
 public class PropertyService {
 	
 	@Autowired
+	UserService userService;
+
+	@Autowired
+	PhotoService photoService;
+
+	@Autowired
 	PropertyRepo propertyRepo;
 	
-	public Property save(Property property) {
-
-	    return propertyRepo.save(property);
+	public Property save(Property property, Integer id) {
+		Property savedProperty = propertyRepo.save(property);
+		userService.addPropertyToUser(id, savedProperty);
+	    return savedProperty;
 	}
 	
 	public Property update(Property property) throws Exception {
@@ -80,23 +91,28 @@ public class PropertyService {
 		return properties;
 	}
 	
-	// public List<Property> findRegPropertys(LocalDate date) {
-	// 	List<Property> propertys = propertyRepo.findRegPropertys(date);
-	// 	return propertys;
-
-	// }
+	public List<Property> checkForDiscount(List<Property> properties){
+		
+		for (Property property : properties) {
+			LocalDate startDate = property.getDateAdded();
+			LocalDate currentDate = LocalDate.now();
+			long daysBetween = ChronoUnit.DAYS.between(startDate, currentDate);
 	
-	// public List<Property> findAuctionPropertys(LocalDate date) {
-	// 	List<Property> propertys = propertyRepo.findAuctionPropertys(date);
-	// 	return propertys;
-
-	// }
-	
-	public List<Property> findPropertiesInInventory() {
-		List<Property> properties = propertyRepo.findPropertiesInInvetory();
+			if (daysBetween > 90) {
+				Double currentPrice = property.getPrice();
+				Double discountedPrice = currentPrice * 0.9;
+				property.setPrice(discountedPrice);
+				propertyRepo.save(property);
+			}
+		}
 		return properties;
-
 	}
+
+	public List<Property> findPropertiesInInventory() {
+		List<Property> properties = propertyRepo.findPropertiesInInventory();
+		return properties;
+	}
+
 
 	public List<Property> findPropertiesSold(LocalDate dateFrom,LocalDate dateTo) {
 		List<Property> properties = propertyRepo.findPropertiesSold(dateFrom,dateTo);
@@ -119,6 +135,17 @@ public class PropertyService {
 	public Property setSoldPrice(Property property, Double price){
 		property.setSalePrice(price); 
 		return propertyRepo.save(property);
+	}
+
+	public List<Property> findByUserId(Integer userId) {
+		List<Property> properties = propertyRepo.findByUser(userId);
+		return properties;
+	
+	}
+
+	public List<Property> findBySquareFoot(Double squareFeet) {
+		List<Property> properties = propertyRepo.findBySquareFeet(squareFeet);
+		return properties;
 	}
 	
     

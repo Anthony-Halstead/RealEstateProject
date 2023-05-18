@@ -25,10 +25,10 @@ public class Property {
     private Integer id;
 
     @Column(name = "number_of_bathrooms")
-    private String numberOfBathrooms;
+    private Integer numberOfBathrooms;
 
     @Column(name = "number_of_bedrooms")
-    private String numberOfBedrooms;
+    private Integer numberOfBedrooms;
 
     @Column(name = "city")
     private String city;
@@ -63,6 +63,9 @@ public class Property {
     @Column(name = "date_sold", nullable = true)
     private LocalDate dateSold;
     
+    @Column(name = "realator_info", nullable = true)
+    private String realatorInfo;
+
 	@OneToMany	    
 	@JoinColumn(name="property_Id",referencedColumnName="id")
 	private List<Photo> propertyPhotos;
@@ -88,7 +91,15 @@ public class Property {
 		return salePrice;
 	}
 
-	public void setSalePrice(Double salePrice) {
+	public String getRealatorInfo() {
+        return realatorInfo;
+    }
+
+    public void setRealatorInfo(String realatorInfo) {
+        this.realatorInfo = realatorInfo;
+    }
+
+    public void setSalePrice(Double salePrice) {
 		this.salePrice = salePrice;
 	}
 
@@ -113,19 +124,19 @@ public class Property {
         return id;
     }
 
-    public String getNumberOfBathrooms() {
+    public Integer getNumberOfBathrooms() {
         return numberOfBathrooms;
     }
 
-    public void setNumberOfBathrooms(String numberOfBathrooms) {
+    public void setNumberOfBathrooms(Integer numberOfBathrooms) {
         this.numberOfBathrooms = numberOfBathrooms;
     }
 
-    public String getNumberOfBedrooms() {
+    public Integer getNumberOfBedrooms() {
         return numberOfBedrooms;
     }
 
-    public void setNumberOfBedrooms(String numberOfBedrooms) {
+    public void setNumberOfBedrooms(Integer numberOfBedrooms) {
         this.numberOfBedrooms = numberOfBedrooms;
     }
 

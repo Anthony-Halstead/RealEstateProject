@@ -36,7 +36,7 @@ public class User {
   
 	@OneToMany 
 	@JoinColumn(name="user_Id",referencedColumnName="id")
-    private List<Property> userPropertys;
+    private List<Property> userProperties;
 
     //----------------------------///
     public User() {}
@@ -49,14 +49,14 @@ public class User {
  		this.isAdmin = isAdmin;
  	}
 
-    public List<Property> getUserPropertys() {
-        return userPropertys;
+    public List<Property> getUserProperties() {
+        return userProperties;
     }
 
 
 
-    public void setUserPropertys(List<Property> userPropertys) {
-        this.userPropertys = userPropertys;
+    public void setUserProperties(List<Property> userProperties) {
+        this.userProperties = userProperties;
     }
 
     public Integer getId() {

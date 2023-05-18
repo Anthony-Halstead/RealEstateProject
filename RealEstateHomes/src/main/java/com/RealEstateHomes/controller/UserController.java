@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.RealEstateHomes.entity.Property;
+
 // import com.RealEstateHomes.entity.Car;
 
 import com.RealEstateHomes.entity.User;
-// import com.RealEstateHomes.service.CarService;
+import com.RealEstateHomes.service.PropertyService;
 import com.RealEstateHomes.service.UserService;
 
 // Denotes that this will be a RESTFul
@@ -34,8 +36,8 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    // @Autowired
-    // CarService carService;
+    @Autowired
+    PropertyService propertyService;
 
     // Configures my endpoint, /signup in the end url, accepts JSON data, Produces JSON data, accessed with a post
     @RequestMapping(
@@ -190,26 +192,28 @@ public class UserController {
 
     }
 
-    // @PostMapping(
-    // value = "/buyCar/{id}/{carId}", 
-    // produces = MediaType.APPLICATION_JSON_VALUE
-    // )
-    // public ResponseEntity<Object> buyCar(@PathVariable Integer id, @PathVariable Integer carId) {
+    
 
-    //     try {
-    //         Car boughtCar = carService.setCarSold(carId);
-    //         boughtCar = carService.setSoldPrice(boughtCar, boughtCar.getPrice());
-    //         User updatedUser = userService.addCarToUser(id, boughtCar);
-    //         return new ResponseEntity<Object>(updatedUser, HttpStatus.OK);
-    //     } catch (Exception e) {
-    //         System.out.println(e);
-    //         return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
-    //     } catch (Error e) {
-    //         System.out.println(e);
-    //         return new ResponseEntity<Object>(e, HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
+    @PostMapping(
+    value = "/buyProperty/{id}/{propertyId}", 
+    produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Object> buyCar(@PathVariable Integer id, @PathVariable Integer propertyId) {
 
-    // }
+        try {
+            Property boughtProperty = propertyService.setPropertySold(propertyId);
+            boughtProperty = propertyService.setSoldPrice(boughtProperty, boughtProperty.getPrice());
+            User updatedUser = userService.addPropertyToUser(id, boughtProperty);
+            return new ResponseEntity<Object>(updatedUser, HttpStatus.OK);
+        } catch (Exception e) {
+            System.out.println(e);
+            return new ResponseEntity<Object>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Error e) {
+            System.out.println(e);
+            return new ResponseEntity<Object>(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+    }
 
     // @PostMapping(
     // value = "/bidOnCar/{id}/{carId}/{bidPrice}", 

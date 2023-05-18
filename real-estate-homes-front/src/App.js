@@ -42,8 +42,8 @@ function App() {
         <Route path="/SignUp" element={<SignUp user={user} setUser={setUser} />} />
         <Route path="/Checkout" element={<Checkout user={user} setUser={setUser} />} />
         <Route path="/Admin" element={<Admin user={user} setUser={setUser} />} />
-        <Route path="/EditCar" element={<EditProperty  user={user} setUser={setUser}/>} />
-        <Route path="/AddCar" element={<AddProperty  user={user} setUser={setUser}  />} />
+        <Route path="/EditProperty" element={<EditProperty  user={user} setUser={setUser}/>} />
+        <Route path="/AddProperty" element={<AddProperty  user={user} setUser={setUser}  />} />
       </Routes>
     </PageWrapper>
   );

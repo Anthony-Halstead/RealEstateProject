@@ -27,16 +27,11 @@ function Header(props) {
     return (
         <div className='header-container'>
             <div className='third-width '>
-                <a href="/"> <img className='third-width' src="https://www.bing.com/images/search?view=detailV2&ccid=Bc48kWIc&id=78AEAFD09804BE5788A47427700C99D5689BDC0E&thid=OIP.Bc48kWIchvLsDpCAVgyIDAHaC6&mediaurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.05ce3c91621c86f2ec0e9080560c880c%3frik%3dDtybaNWZDHAndA%26riu%3dhttp%253a%252f%252fblog.aqarat4u.com%252fwp-content%252fuploads%252f2016%252f09%252fBeware-of-fake-real-estate-agents-in-Nigeria.png%26ehk%3d%252fa2oDbyst1VbhtMClfXaKqPONoTiQWxAbG%252fXDv9Nr8A%253d%26risl%3d%26pid%3dImgRaw%26r%3d0&exph=200&expw=508&q=funny+fake+real-estate+sign+images&simid=608010543171129691&FORM=IRPRST&ck=E46525F9321DC52D8CF7B18BD8F2AADC&selectedIndex=162" /></a>
+                <a href="/"> <img className='third-width' src="https://th.bing.com/th/id/OIP.Bc48kWIchvLsDpCAVgyIDAHaC6?w=328&h=137&c=7&r=0&o=5&pid=1.7" /></a>
             </div>
             <div className='third-width'>
                 <a href="/">
                     <div className='header-link'>HOME</div>
-                </a>
-            </div>
-            <div className='third-width'>
-                <a href="/Buy">
-                    <div className='header-link'>BUY</div>
                 </a>
             </div>
             <div className='third-width'>
@@ -51,7 +46,7 @@ function Header(props) {
         return (
             <div className='header-container'>
             <div className='third-width '>
-                <a href="/"> <img className='third-width' src="https://www.bing.com/images/search?view=detailV2&ccid=Bc48kWIc&id=78AEAFD09804BE5788A47427700C99D5689BDC0E&thid=OIP.Bc48kWIchvLsDpCAVgyIDAHaC6&mediaurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.05ce3c91621c86f2ec0e9080560c880c%3frik%3dDtybaNWZDHAndA%26riu%3dhttp%253a%252f%252fblog.aqarat4u.com%252fwp-content%252fuploads%252f2016%252f09%252fBeware-of-fake-real-estate-agents-in-Nigeria.png%26ehk%3d%252fa2oDbyst1VbhtMClfXaKqPONoTiQWxAbG%252fXDv9Nr8A%253d%26risl%3d%26pid%3dImgRaw%26r%3d0&exph=200&expw=508&q=funny+fake+real-estate+sign+images&simid=608010543171129691&FORM=IRPRST&ck=E46525F9321DC52D8CF7B18BD8F2AADC&selectedIndex=162" /></a>
+                <a href="/"> <img className='third-width' src="https://th.bing.com/th/id/OIP.Bc48kWIchvLsDpCAVgyIDAHaC6?w=328&h=137&c=7&r=0&o=5&pid=1.7" /></a>
             </div>
             <div className='third-width'>
                 <a href="/">
@@ -71,7 +66,7 @@ function Header(props) {
         return (
             <div className='header-container'>
             <div className='third-width '>
-                <a href="/"> <img className='third-width' src="https://www.bing.com/images/search?view=detailV2&ccid=Bc48kWIc&id=78AEAFD09804BE5788A47427700C99D5689BDC0E&thid=OIP.Bc48kWIchvLsDpCAVgyIDAHaC6&mediaurl=https%3a%2f%2fth.bing.com%2fth%2fid%2fR.05ce3c91621c86f2ec0e9080560c880c%3frik%3dDtybaNWZDHAndA%26riu%3dhttp%253a%252f%252fblog.aqarat4u.com%252fwp-content%252fuploads%252f2016%252f09%252fBeware-of-fake-real-estate-agents-in-Nigeria.png%26ehk%3d%252fa2oDbyst1VbhtMClfXaKqPONoTiQWxAbG%252fXDv9Nr8A%253d%26risl%3d%26pid%3dImgRaw%26r%3d0&exph=200&expw=508&q=funny+fake+real-estate+sign+images&simid=608010543171129691&FORM=IRPRST&ck=E46525F9321DC52D8CF7B18BD8F2AADC&selectedIndex=162" /></a>
+                <a href="/"> <img className='third-width' src="https://th.bing.com/th/id/OIP.Bc48kWIchvLsDpCAVgyIDAHaC6?w=328&h=137&c=7&r=0&o=5&pid=1.7" /></a>
             </div>
             <div className='third-width'>
                 <a href="/">

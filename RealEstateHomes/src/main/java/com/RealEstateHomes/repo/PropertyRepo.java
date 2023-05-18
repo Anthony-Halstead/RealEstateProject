@@ -10,7 +10,9 @@ import com.RealEstateHomes.entity.Property;
 
 @Repository
 public interface PropertyRepo extends JpaRepository<Property, Integer> {
-    
+
+    @Query(value="select * from property where is_sold = 0 AND user_id LIKE ?1", nativeQuery = true)
+    public List<Property> findByUser(Integer id);
 
     @Query(value="select * from property where is_sold = 0 AND state LIKE ?1", nativeQuery = true)
     public List<Property> findByState(String state);
@@ -31,10 +33,13 @@ public interface PropertyRepo extends JpaRepository<Property, Integer> {
     public List<Property> findAuctionProperties(LocalDate date);
     
     @Query(value="select * from property where is_sold = 0", nativeQuery = true)
-    public List<Property> findPropertiesInInvetory();
+    public List<Property> findPropertiesInInventory();
     
     @Query(value="select * from property where date_sold BETWEEN DATE(?1) AND DATE(?2)",nativeQuery = true)
     public List<Property> findPropertiesSold(LocalDate dateFrom, LocalDate dateTo);
+
+
+  
 	
 	
 }

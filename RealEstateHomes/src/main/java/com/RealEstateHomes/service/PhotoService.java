@@ -5,6 +5,7 @@ import com.RealEstateHomes.entity.Property;
 import com.RealEstateHomes.entity.Photo;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,8 @@ public class PhotoService {
 	    photoRepo.deleteById(id);
 	}
 
-    public List<Photo> findByProperty(Integer carID){
-        return photoRepo.findByPropertyID(carID);
+    public List<Photo> findByProperty(Integer propertyID){
+        return photoRepo.findByPropertyID(propertyID);
     }
+
 }

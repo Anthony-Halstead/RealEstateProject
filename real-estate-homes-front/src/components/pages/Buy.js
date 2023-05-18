@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../css/pages/buy.css';
+import '../../css/reusables/positions.css';
 import { useNavigate } from 'react-router-dom';
 
 function Buy(props) {
@@ -9,11 +10,12 @@ function Buy(props) {
   const [properties, setProperties] = useState([]);
   const [selectedProperties, setSelectedProperties] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [search, setSearch] = useState('');
+  const [searchCity, setSearchCity] = useState('');
+  const [searchState, setSearchState] = useState('');
+  const [searchSquareFoot, setSearchSquareFoot] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
- 
       axios
         .get('http://localhost:8080/property/findPropertiesInInventory')
         .then((response) => {
@@ -24,14 +26,42 @@ function Buy(props) {
         });  
   }, []);
 
-  const handleSearchChange = (event) => {
-    setSearch(event.target.value);
+  const handleSearchCityChange = (event) => {
+    setSearchCity(event.target.value);
+  };
+  const handleSearchStateChange = (event) => {
+    setSearchState(event.target.value);
+  };
+  const handleSearchSquareFootChange = (event) => {
+    setSearchSquareFoot(event.target.value);
   };
 
-  const handleSearchSubmit = (event) => {
+  const handleSearchCitySubmit = (event) => {
     event.preventDefault();
     axios
-      .get(`http://localhost:8080/property/findPropertiesByCity/${search}`)
+      .get(`http://localhost:8080/property/findPropertiesByCity/${searchCity}`)
+      .then((response) => {
+        setProperties(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleSearchStateSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .get(`http://localhost:8080/property/findPropertiesByState/${searchState}`)
+      .then((response) => {
+        setProperties(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleSearchSquareFootSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .get(`http://localhost:8080/property/findPropertiesBySquareFoot/${searchSquareFoot}`)
       .then((response) => {
         setProperties(response.data);
       })
@@ -80,15 +110,33 @@ function Buy(props) {
   };
 
   return (
-    <div className='buy-content'>
+    <div className='justify-content-center third-width flex-row'>
       <div>
         <input
-          type='text'
-          value={search}
-          onChange={handleSearchChange}
+          type='city'
+          value={searchCity}
+          onChange={ handleSearchCityChange}
           placeholder='Search by city'
         />
-        <button onClick={handleSearchSubmit}>Search</button>
+        <button onClick={handleSearchCitySubmit}>Search</button>
+      </div>
+      <div>
+        <input
+          type='state'
+          value={searchState}
+          onChange={handleSearchStateChange}
+          placeholder='Search by state'
+        />
+        <button onClick={handleSearchStateSubmit}>Search</button>
+      </div>
+        <div>
+        <input
+          type='squareFoot'
+          value={searchSquareFoot}
+          onChange={handleSearchSquareFootChange}
+          placeholder='Search by squareFoot'
+        />
+        <button onClick={handleSearchSquareFootSubmit}>Search</button>
       </div>
       {showProperties()}
       {isModalOpen && selectedProperties &&(
@@ -97,22 +145,23 @@ function Buy(props) {
             <button onClick={closeModal}>Close</button>
           </div>
           <div>
-            <div>DESCRIPTION: {selectedProperty.description}</div>
-            <div>CITY: {selectedProperty.city}</div>
-            <div>STATE: {selectedProperty.state}</div>
-            <div>YEAR BUILT: {selectedProperty.yearBuilt}</div>
-            <div>NUMBER OF BEDROOMS: {selectedProperty.numberOfBedrooms}</div>
-            <div>NUMBER OF BATHROOMS: {selectedProperty.numberOfBathrooms}</div>
-            <div>PETS: {selectedProperty.isPetsAllowed}</div>
-            <div>SQUARE FEET: {selectedProperty.squareFeet}</div>
-            <div>DATE ADDED:{selectedProperty.dateAdded}</div>
-            <div>PRICE: {selectedProperty.price}</div>
+            <div>DESCRIPTION: {selectedProperties.description}</div>
+            <div>REALATOR INFO: {selectedProperties.realatorInfo}</div>
+            <div>CITY: {selectedProperties.city}</div>
+            <div>STATE: {selectedProperties.state}</div>
+            <div>YEAR BUILT: {selectedProperties.yearBuilt}</div>
+            <div>NUMBER OF BEDROOMS: {selectedProperties.numberOfBedrooms}</div>
+            <div>NUMBER OF BATHROOMS: {selectedProperties.numberOfBathrooms}</div>
+            <div>PETS: {selectedProperties.isPetsAllowed}</div>
+            <div>SQUARE FEET: {selectedProperties.squareFeet}</div>
+            <div>DATE ADDED:{selectedProperties.dateAdded}</div>
+            <div>PRICE: {selectedProperties.price}</div>
             <div className='property-box'>
-              {showPropertyPhotos(selectedProperty)}
+              {showPropertyPhotos(selectedProperties)}
             </div>
           </div>
           <div>
-            <button onClick={() => goToCheckout(selectedProperty)}>Checkout</button>
+            <button onClick={() => goToCheckout(selectedProperties)}>Checkout</button>
           </div>
         </div>
       )}

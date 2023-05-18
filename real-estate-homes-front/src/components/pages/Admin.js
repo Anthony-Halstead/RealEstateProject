@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router';
 import report from '../reusables/ReportGenerator';
 import '../../css/pages/admin.css'
 
-function Admin() {
+function Admin(props) {
 
   const [reportDates, setReportDates] = useState({ startDate: '', endDate: '' });
   const [properties, setProperties] = useState([]);
@@ -37,8 +37,8 @@ function Admin() {
     navigator('/AddProperty');
   }
 
-  const findAllSubmitHandler = () => {
-    axios.get('http://localhost:8080/property/findPropertiesInInventory')
+  const findPropertiesSubmitHandler = () => {
+    axios.get(`http://localhost:8080/property/findByUser/${props.user.id}`)
       .then((response) => {
         console.log("response data", response.data)
         setProperties(response.data);
@@ -79,11 +79,11 @@ function Admin() {
         Report End Date
         <input className='sidebar-input-container' value={reportDates.endDate} name='endDate' type='endDate' onChange={changeHandler} required></input>
         <button onClick={reportSubmitHandler}>GET REPORT</button>
-        <h1>EDIT CARS</h1>
+        <h1>EDIT PROPERTIES</h1>
         <h2>Find All</h2>
-        <button onClick={findAllSubmitHandler}>FIND ALL CARS</button>
-        <h1>ADD CARS</h1>
-        <button onClick={addPropertiesSubmitHandler}>ADD NEW CAR</button>
+        <button onClick={findPropertiesSubmitHandler}>SEE MY PROPERTIES</button>
+        <h1>ADD PROPERTIES</h1>
+        <button onClick={addPropertiesSubmitHandler}>ADD NEW PROPERTIES</button>
       </div>
       <div className='flex-column fill'>
         {showProperties()}
